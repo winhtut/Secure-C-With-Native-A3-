@@ -1,0 +1,3 @@
+/Users/ncc/CLionProjects/NCC_Online_Secure_Bank/cmake-build-debug/CMakeFiles/NCC_Online_Secure_Bank.dir
+/Users/ncc/CLionProjects/NCC_Online_Secure_Bank/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/ncc/CLionProjects/NCC_Online_Secure_Bank/cmake-build-debug/CMakeFiles/rebuild_cache.dir
