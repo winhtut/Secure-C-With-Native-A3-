@@ -6,13 +6,13 @@
 #define NCC_ONLINE_SECURE_BANK_SECURE_BANK_H
 #include "stdlib.h"
 #include "stdio.h"
+#define USERSIZE 1000
 
 void login();
 void rEgister();
 int check_input(char option[2]);
-void gmail_exit_checking(char gmail[50]);
 int char_counting(char my_Char[50]);
-void email_exit_checking(char gmail[50]);
+void email_exist_checking(char email[50]);
 
 //GlobalVariables
 int G_index=0; // For users
@@ -43,10 +43,11 @@ struct info{
     char address[100];
 
     struct trans tr[300];
+    //%u%s%s%s%s%u%s%s%s%d%d%s%llu%s%u%u%f%s%s
 
 };
 
-struct info db[1000];
+struct info db[USERSIZE];
 
 
 void main_menu(){
@@ -82,7 +83,7 @@ void rEgister(){
     printf("This is Swiss Secure Bank Register!\nEnter your gmail>>:");
     scanf(" %[^\n]",&rEmail[0]);
     email_found = -1; // get back setting for -1 ( means for negative )
-    email_exit_checking(rEmail);
+    email_exist_checking(rEmail);
 }
 int check_input(char option[2]){
     if (option[0] >= 49 && option[1] == '\0' && option[0] <=57) {
@@ -92,7 +93,7 @@ int check_input(char option[2]){
     }
 }
 
-void email_exit_checking(char email[50]){
+void email_exist_checking(char email[50]){
     int counter = char_counting(email);//for user input email
     int same_counting=0;
 
@@ -125,5 +126,23 @@ int char_counting(char my_Char[50]){
     }
 
     return count;
+}
+
+void loading_from_file(){
+
+    FILE *fptr = fopen("encrypted_data.txt","r");
+    if(fptr != NULL) {
+
+        for (register int user = 0; user < USERSIZE; user++) {
+            fscanf(fptr,"%u%s%s%s%s%u%s%s%s%d%d%s%llu%s%u%u%f%s%s",db[user].id ,db[user].name ,db[user].nrc,db[user].email ,
+                   db[user].password,db[user].phoneNumber,db[user].encryption_key , db[user].recovery_key , db[user].account_status ,
+                   db[user].account_level , db[user].minimum_opening_deposit , db[user].currency , db[user].current_amount , db[user].loanStatus,
+                   db[user].monthly_income , db[user].loan_amount , db[user].loan_rate , db[user].address
+                   );
+
+        }
+    } else{
+        printf("File Opening Error at loading_from_file Function()\n");
+    }
 }
 #endif //NCC_ONLINE_SECURE_BANK_SECURE_BANK_H
