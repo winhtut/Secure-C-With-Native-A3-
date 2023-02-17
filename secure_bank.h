@@ -10,6 +10,38 @@
 void login();
 void rEgister();
 int check_input(char option[2]);
+
+
+struct trans{
+    char note[200];
+};
+struct info{
+    unsigned int id;
+    char name[50];
+    char nrc[20];
+    char email[50];
+    char password[50];
+    unsigned int phoneNumber;
+    char encryption_key[50];//to encrypt user data
+    char recovery_key[50];// for recover account
+    char account_status[10];
+    int account_level;
+    int minimum_opening_deposit;
+    char currency[5];
+    unsigned long long int current_amount;//llu
+    char loanStatus[1];
+    unsigned int monthly_income;
+    unsigned int loan_amount;
+    double loan_rate;
+    char address[100];
+
+    struct trans tr[300];
+
+};
+
+struct info db[1000];
+
+
 void main_menu(){
     char option[2];
 
