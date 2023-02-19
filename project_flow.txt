@@ -7,6 +7,7 @@ phoneNumber
 encryption_key
 recovery_key
 account_status
+account_type
 account_level
 minimum_opening_deposit
 currency

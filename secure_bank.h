@@ -7,16 +7,21 @@
 #include "stdlib.h"
 #include "stdio.h"
 #define USERSIZE 1000
+#define DATA_COUNT 20
 
 void login();
 void rEgister();
 int check_input(char option[2]);
 int char_counting(char my_Char[50]);
 void email_exist_checking(char email[50]);
+void loading_from_file();
+void space_counter();
+void printing_all_data();
 
 //GlobalVariables
 int G_index=0; // For users
 int email_found=-1;
+int space_array[DATA_COUNT];
 
 
 struct trans{
@@ -32,6 +37,7 @@ struct info{
     char encryption_key[50];//to encrypt user data
     char recovery_key[50];// for recover account
     char account_status[10];
+    int account_type; // 1 for personal 2 for business 3 for others.....
     int account_level;
     int minimum_opening_deposit;
     char currency[5];
@@ -134,15 +140,72 @@ void loading_from_file(){
     if(fptr != NULL) {
 
         for (register int user = 0; user < USERSIZE; user++) {
-            fscanf(fptr,"%u%s%s%s%s%u%s%s%s%d%d%s%llu%s%u%u%f%s%s",db[user].id ,db[user].name ,db[user].nrc,db[user].email ,
-                   db[user].password,db[user].phoneNumber,db[user].encryption_key , db[user].recovery_key , db[user].account_status ,
-                   db[user].account_level , db[user].minimum_opening_deposit , db[user].currency , db[user].current_amount , db[user].loanStatus,
-                   db[user].monthly_income , db[user].loan_amount , db[user].loan_rate , db[user].address
-                   );
+            fscanf(fptr,"%u%s%s%s%s%u%s%s%s%d%d%d%s%llu%s%u%u%f%s",&db[user].id ,&db[user].name ,&db[user].nrc,&db[user].email ,&db[user].password,&db[user].phoneNumber,&db[user].encryption_key , &db[user].recovery_key , &db[user].account_status ,&db[user].account_type,&db[user].account_level , &db[user].minimum_opening_deposit , &db[user].currency , &db[user].current_amount , &db[user].loanStatus,&db[user].monthly_income , &db[user].loan_amount , &db[user].loan_rate , &db[user].address);
+            for(register int trc=0; trc<= space_array[user]-19; trc++){
+                fscanf(fptr , "%s",&db[user].tr[trc].note);
+            }
+            if(db[user].id==0){
+                break;
+            }
+            G_index++;
 
         }
     } else{
         printf("File Opening Error at loading_from_file Function()\n");
     }
+}
+
+void printing_all_data(){
+
+    for(int user=0; user<G_index ; user++){
+
+        printf("%u-%s-%s-%s-%s-%u-%s-%s-%s-%d-%d-%d-%s-%llu-%s-%u-%u-%f-%s",db[user].id ,db[user].name ,db[user].nrc,db[user].email ,db[user].password,db[user].phoneNumber,db[user].encryption_key , db[user].recovery_key , db[user].account_status ,db[user].account_type,db[user].account_level , db[user].minimum_opening_deposit , db[user].currency , db[user].current_amount , db[user].loanStatus,db[user].monthly_income , db[user].loan_amount , db[user].loan_rate , db[user].address);
+
+        for(int gcc=0; gcc<= space_array[user]-19 ; gcc++){
+
+            printf("-%s",db[user].tr[gcc].note);
+        }
+        printf("\n");
+
+
+    }
+
+}
+
+void space_counter(){
+
+    FILE *fptr = fopen("encrypted_data.txt","r");
+
+    if(fptr != NULL){
+        char c = fgetc(fptr);
+        int index=0;
+
+        while (!feof(fptr)){
+            if(c != '\n'){
+
+                if( c == ' '){
+                    space_array[index] +=1;
+
+                }
+                c = fgetc(fptr);
+
+            } else{
+
+                index++;
+                c = fgetc(fptr);
+            }
+
+        }
+
+    } else{
+        printf("File open error at space_counter fun()\n");
+    }
+
+    for(int i=0; i<DATA_COUNT; i++){
+
+        printf(" %d",space_array[i]);
+    }
+    printf("\n");
+
 }
 #endif //NCC_ONLINE_SECURE_BANK_SECURE_BANK_H
