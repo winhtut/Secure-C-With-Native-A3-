@@ -13,9 +13,12 @@
 int main()
 {
     //printf("%sBold text%s\n",BOLD,RESET);
-    space_counter();
-    loading_from_file();
-    printing_all_data();
-    main_menu();
+
+    char arr[5]={'w','i','n'};
+    encryption(arr);
+//    space_counter();
+//    loading_from_file();
+//    printing_all_data();
+//    main_menu();
     return 0;
 }
