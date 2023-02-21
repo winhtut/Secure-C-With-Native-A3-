@@ -17,9 +17,7 @@ void email_exist_checking(char email[50]);
 void loading_from_file();
 void space_counter();
 void printing_all_data();
-void encryption(char to_encrypt[200]);
-void binary_converter(int ascii);
-int sizeof_binary_array(int bin_array[16]);
+
 
 //GlobalVariables
 int G_index=0; // For users
@@ -209,67 +207,7 @@ void space_counter(){
 
 }
 
-void encryption(char to_encrypt[200]){
-
-    int char_counter = char_counting(to_encrypt);
-
-    for(register int i=0; i<char_counter; i++){
-
-        int one_word = to_encrypt[i];
-        printf("%d\n",one_word);
-        binary_converter(one_word);
-        printf("\n");
 
 
 
-
-    }
-
-
-}
-
-void decryption(){
-
-
-}
-
-void binary_converter(int ascii) {
-    int sixteen_array[16];
-    int bin_array[16] = {11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11};
-
-    for (register int i = 0; ascii > 0; i++) {
-        bin_array[i] = ascii % 2;
-        ascii = ascii / 2;
-
-    }
-    int counter = sizeof_binary_array(bin_array);
-
-    int to_insert = 16-counter;
-
-    for(int i=0; i<to_insert;i++){
-        sixteen_array[i]=0;
-    }
-    for (int x = 0; x < counter; ++x) {
-
-        sixteen_array[to_insert] = bin_array[x];
-        to_insert++;
-    }
-
-    for (int i = 0; i < 16; i++) {
-        printf("%d", sixteen_array[i]);
-    }
-}
-
-int sizeof_binary_array(int bin_array[16]){
-    int counter=0;
-    for(register int i=0; i<16; i++){
-
-        if(bin_array[i] == 11){
-            break;
-        }
-        counter++;
-
-    }
-    return counter;
-}
 #endif //NCC_ONLINE_SECURE_BANK_SECURE_BANK_H

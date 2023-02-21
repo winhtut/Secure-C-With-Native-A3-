@@ -3,4 +3,4 @@ project(NCC_Online_Secure_Bank C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(NCC_Online_Secure_Bank main.c secure_bank.h)
+add_executable(NCC_Online_Secure_Bank main.c secure_bank.h corn_encryption.h)
