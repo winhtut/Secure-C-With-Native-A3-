@@ -15,6 +15,8 @@ int key_encrypt(char key[4]);
 void char_to_binary(char to_encrypt[200],char user_key[4]);
 void corn_encrypt(int one_word_array[16],int key_bin_array[16]);
 void show_16Bin_array(int toprint[16]);
+int binary_to_ascii(int encrypted_bin[16]);
+int my_pow(int number);
 
 
 //Global array and var
@@ -117,12 +119,63 @@ void corn_encrypt(int one_word_array[16],int key_bin_array[16]){
     }
 
     show_16Bin_array(one_word_array);
-    printf(" + ");
+    printf(" ^ ");
     show_16Bin_array(key_bin_array);
     printf(" = ");
     show_16Bin_array(encrypted_binary_array);
-    printf("\n");
+    //printf("\n");
+    int my_ascii = binary_to_ascii(encrypted_binary_array);
 
+    printf("Ascii for final %d\n",my_ascii);
+
+}
+
+int binary_to_ascii(int encrypted_bin[16]){
+    int final_ascii=0;
+    int bin_counter =0;
+    for(int i=0; i<16; i++){
+        if(encrypted_bin[i]==1){
+            break;
+        } else{
+            bin_counter++;
+        }
+    }
+    int start  = 16-bin_counter;
+    int power = start-1;
+
+    printf("bin_counter %d",bin_counter);
+
+    for(int i=0; i<start; i++){
+
+        if(encrypted_bin[bin_counter]==1){
+            final_ascii +=my_pow(power);
+
+            bin_counter++;
+        } else{
+            bin_counter++;
+
+        }
+        power--;
+
+
+    }
+//    if(encrypted_bin[15]==1){
+//        final_ascii++;
+//    }
+
+    return final_ascii;
+}
+
+
+int my_pow(int number){
+    int result=1;
+
+    while (number!=0){
+        result *= 2;
+        number--;
+    }
+
+    return result;
 }
 
 void show_16Bin_array(int toprint[16]){
@@ -131,6 +184,8 @@ void show_16Bin_array(int toprint[16]){
         printf("%d",toprint[i]);
     }
 }
+
+
 
 
 //void copy_two_16bin_array(int receiver[16],int transmitter[16]){
