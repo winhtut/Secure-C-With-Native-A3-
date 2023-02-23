@@ -11,7 +11,7 @@
 void encryption(char to_encrypt[200]);
 void ascii_to_binary_converter(int ascii);
 int sizeof_binary_array(const int bin_array[16]);
-int key_encrypt(char key[4]);
+int key_encrypt(char key[6]);
 void char_to_binary(char to_encrypt[200],char user_key[4]);
 int corn_encrypt(int one_word_array[16],int key_bin_array[16]);
 void show_16Bin_array(int toprint[16]);
@@ -67,9 +67,7 @@ void char_to_binary(char to_encrypt[200],char user_key[4]){ // username , email 
     }
     writing_encrypted_tofile();
     printf("[+]Recorded at file:\n");
-
 }
-
 void writing_encrypted_tofile(){
     FILE *fptr = fopen("encryptedtest.txt","a");
     int elements_in_array =integer_array_counting_withZero(final_ascii_value_array);
@@ -78,8 +76,7 @@ void writing_encrypted_tofile(){
         for(int i=0; i<elements_in_array; i++){
             fprintf(fptr,"%d%c",final_ascii_value_array[i],' ');
         }
-        fprintf(fptr,"%c",'\n');
-
+        fprintf(fptr,"%d%c",1,'\n');
 
     }
 
@@ -124,7 +121,7 @@ int sizeof_binary_array(const int bin_array[16]){
     return counter;
 }
 
-int key_encrypt(char key[4]){
+int key_encrypt(char key[6]){
     int key_counter = char_counting(key);
     int keyData=0;
     for(int i=0; i<key_counter; i++){
@@ -169,7 +166,7 @@ int binary_to_ascii(const int encrypted_bin[16]){
     int start  = 16-bin_counter;
     int power = start-1;
 
-    printf("bin_counter %d",bin_counter);
+    //printf("bin_counter %d",bin_counter);
 
     for(int i=0; i<start; i++){
 

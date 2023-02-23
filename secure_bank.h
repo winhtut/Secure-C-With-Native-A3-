@@ -12,7 +12,7 @@
 void login();
 void rEgister();
 int check_input(char option[2]);
-int char_counting(char my_Char[50]);
+int char_counting(const char my_Char[200]);
 void email_exist_checking(char email[50]);
 void loading_from_file();
 void space_counter();
@@ -121,9 +121,9 @@ void email_exist_checking(char email[50]){
 
 }
 
-int char_counting(char my_Char[50]){
+int char_counting(const char my_Char[200]){
     int count=0;
-    for(register int a=0; a<50; a++){
+    for(register int a=0; a<200; a++){
         if( my_Char[a] =='\0'){
             break;
         }
