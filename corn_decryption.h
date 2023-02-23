@@ -52,7 +52,13 @@ void reading_encrypted_data_from_file(){
                 }
                 printf("\n");
 
+
                 decryption_for_ascii_array(ascii_value_array);
+                for(int i=0; i<index; i++){
+                    ascii_value_array[i]=0;
+
+                }
+
                 fscanf(fptr,"%d",&ascii_value);
                 index=0;
             }
@@ -82,12 +88,13 @@ void decryption_for_ascii_array(int ascii_array[200]){
     }
    // we can store data to database;
     printf("Decrypted data one line: %s\n",decrypted_char_array);
-    for(register int i=0; i<200; i++){
+    int clear_counter = char_counting(decrypted_char_array);
+    for(register int i=0; i<clear_counter; i++){
         decrypted_char_array[i]='\0';
     }
 
 
-    //int clear_counter = char_counting(decrypted_char_array);
+
 
 
 }
