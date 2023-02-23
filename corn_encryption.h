@@ -10,23 +10,35 @@
 // function declaration
 void encryption(char to_encrypt[200]);
 void ascii_to_binary_converter(int ascii);
-int sizeof_binary_array(int bin_array[16]);
+int sizeof_binary_array(const int bin_array[16]);
 int key_encrypt(char key[4]);
 void char_to_binary(char to_encrypt[200],char user_key[4]);
-void corn_encrypt(int one_word_array[16],int key_bin_array[16]);
+int corn_encrypt(int one_word_array[16],int key_bin_array[16]);
 void show_16Bin_array(int toprint[16]);
-int binary_to_ascii(int encrypted_bin[16]);
+int binary_to_ascii(const int encrypted_bin[16]);
 int my_pow(int number);
-
+void clearing_final_ascii_value_array();
+int integer_array_counting_withZero(const int intArray[200]);
+void writing_encrypted_tofile();
 
 //Global array and var
 int sixteen_array[16];
 int encrypted_binary_array[16];
 int user_key_binary_array[16];
+int final_ascii_value_array[200];
+
+void clearing_final_ascii_value_array(){
+
+    for(register int i=0; i<200;i++){
+        final_ascii_value_array[i]=0;
+    }
 
 
+}
 
 void char_to_binary(char to_encrypt[200],char user_key[4]){ // username , email , password, transaction record , personal or business
+
+    clearing_final_ascii_value_array();// to clear array;
 
     int ascii_user_key= key_encrypt(user_key);
     ascii_to_binary_converter(ascii_user_key);
@@ -34,9 +46,6 @@ void char_to_binary(char to_encrypt[200],char user_key[4]){ // username , email 
     for(int i=0; i<16 ; i++){
         user_key_binary_array[i] = sixteen_array[i];
     }
-
-
-
 
     int char_counter = char_counting(to_encrypt);
 
@@ -49,12 +58,30 @@ void char_to_binary(char to_encrypt[200],char user_key[4]){ // username , email 
 //        for (int bin = 0; bin < 16; bin++) {
 //            printf("%d",sixteen_array[bin]);
 //        }
-        corn_encrypt(sixteen_array ,user_key_binary_array );
-
+        int final_ascii = corn_encrypt(sixteen_array ,user_key_binary_array );
+        final_ascii_value_array[i]=final_ascii;
+        for(int a=0; a<=i; a++){
+            printf(" %d",final_ascii_value_array[a]);
+        }
         printf("\n");
     }
+    writing_encrypted_tofile();
+    printf("[+]Recorded at file:\n");
+
+}
+
+void writing_encrypted_tofile(){
+    FILE *fptr = fopen("encryptedtest.txt","a");
+    int elements_in_array =integer_array_counting_withZero(final_ascii_value_array);
+
+    if( fptr != NULL){
+        for(int i=0; i<elements_in_array; i++){
+            fprintf(fptr,"%d%c",final_ascii_value_array[i],' ');
+        }
+        fprintf(fptr,"%c",'\n');
 
 
+    }
 
 }
 
@@ -82,11 +109,9 @@ void ascii_to_binary_converter(int ascii) {
         to_insert++;
     }
 
-
-
 }
 
-int sizeof_binary_array(int bin_array[16]){
+int sizeof_binary_array(const int bin_array[16]){
     int counter=0;
     for(register int i=0; i<16; i++){
 
@@ -112,7 +137,7 @@ int key_encrypt(char key[4]){
 
 }
 
-void corn_encrypt(int one_word_array[16],int key_bin_array[16]){
+int corn_encrypt(int one_word_array[16],int key_bin_array[16]){
 
     for(int i=0; i<16; i++){
         encrypted_binary_array[i] = one_word_array[i]^key_bin_array[i];
@@ -126,11 +151,12 @@ void corn_encrypt(int one_word_array[16],int key_bin_array[16]){
     //printf("\n");
     int my_ascii = binary_to_ascii(encrypted_binary_array);
 
-    printf("Ascii for final %d\n",my_ascii);
+    //printf("Ascii for final %d\n",my_ascii);
+    return my_ascii;
 
 }
 
-int binary_to_ascii(int encrypted_bin[16]){
+int binary_to_ascii(const int encrypted_bin[16]){
     int final_ascii=0;
     int bin_counter =0;
     for(int i=0; i<16; i++){
@@ -157,7 +183,6 @@ int binary_to_ascii(int encrypted_bin[16]){
         }
         power--;
 
-
     }
 //    if(encrypted_bin[15]==1){
 //        final_ascii++;
@@ -165,7 +190,6 @@ int binary_to_ascii(int encrypted_bin[16]){
 
     return final_ascii;
 }
-
 
 int my_pow(int number){
     int result=1;
@@ -185,8 +209,20 @@ void show_16Bin_array(int toprint[16]){
     }
 }
 
+int integer_array_counting_withZero(const int intArray[200]){
 
+    int element_counter=0;
+    for(register int i=0; i<200; i++){
 
+        if(intArray[i]==0){
+            break;
+        }
+        element_counter++;
+
+    }
+
+    return element_counter;
+}
 
 //void copy_two_16bin_array(int receiver[16],int transmitter[16]){
 //

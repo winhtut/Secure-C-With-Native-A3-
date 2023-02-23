@@ -93,7 +93,8 @@
 			"sourceIndexes" : 
 			[
 				1,
-				2
+				2,
+				3
 			]
 		}
 	],
@@ -113,6 +114,11 @@
 		{
 			"backtrace" : 1,
 			"path" : "corn_encryption.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "corn_decryption.h",
 			"sourceGroupIndex" : 1
 		}
 	],
