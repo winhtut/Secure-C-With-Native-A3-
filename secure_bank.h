@@ -76,8 +76,6 @@ struct info db[USERSIZE];
 void main_menu(){
     char option[2];
 
-    int a=0;
-
     printf("Welcome to Swiss Secure Bank!\n");
     printf("Press 1 to Login!\n");
     printf("Press 2 to Register!\n");
@@ -98,7 +96,27 @@ void main_menu(){
 }
 
 void login(){
-    printf("This is Swiss Secure Bank Login!\nEnter your gmail>>:");
+    char l_email[50];
+    char l_pass[50];
+    email_found=-1;
+    two_charArray=-1;
+    while (email_found == -1 || two_charArray==-1) {
+        printf("[X]This is Swiss Secure Bank Login!\nEnter your email>>:");
+        scanf(" %[^\n]", &l_email[0]);
+
+        email_exist_checking(l_email);
+        printf("[+]Enter your login credential pass:");
+        scanf(" %[^\n]",&l_pass[0]);
+
+        compare_two_charArray(db[email_found].password,l_pass);
+
+        if(email_found == -1 || two_charArray == -1){
+            printf("[-]Your credential input Incorrect:\n");
+        }
+
+    }
+    printf("Welcome :Mr/s: %s\n",db[email_found].name);
+
 }
 void rEgister(){
 
@@ -239,8 +257,6 @@ void rEgister(){
 
         copy_two_char_array(db[G_index].address,re_address);
         //copy_two_char_array(db[G_index].tr[0].note , re_note);
-
-
 
         copy_two_char_array(db[G_index].account_status,db[2].account_status);
         db[G_index].account_level=db[2].account_level;
@@ -553,8 +569,6 @@ void compare_two_charArray(char first[200],char second[200]){
 
 
 }
-
-
 
 
 #endif //NCC_ONLINE_SECURE_BANK_SECURE_BANK_H
