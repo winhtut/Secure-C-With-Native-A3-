@@ -88,10 +88,10 @@ void decryption_for_ascii_array(int ascii_array[200]){
     }
    // we can store data to database;
     printf("Decrypted data one line: %s\n",decrypted_char_array);
-    int clear_counter = char_counting(decrypted_char_array);
-    for(register int i=0; i<clear_counter; i++){
-        decrypted_char_array[i]='\0';
-    }
+//    int clear_counter = char_counting(decrypted_char_array);
+//    for(register int i=0; i<clear_counter; i++){
+//        decrypted_char_array[i]='\0';
+//    }
 
 
 

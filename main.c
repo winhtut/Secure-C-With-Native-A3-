@@ -20,32 +20,32 @@ int main()
     //printf("%sBold text%s\n",BOLD,RESET);
 
 
-    int process=0;
-    while (process !=3 ) {
-        printf("Press 1 to encrypt and Press 2 to decrypt: or Press 3 to exit:");
-        scanf("%d", &process);
+//    int process=0;
+//    while (process !=3 ) {
+//        printf("Press 1 to encrypt and Press 2 to decrypt: or Press 3 to exit:");
+//        scanf("%d", &process);
+//
+//
+//        if (process == 1) {
+//            char encrypt_key[4];
+//            char toEncrypt[50];
+//
+//            printf("Enter encryption key:(only 4 character):");
+//            scanf(" %[^\n]", &encrypt_key[0]);
+//
+//            printf("Enter data to Encrypt!");
+//            scanf(" %[^\n]", &toEncrypt[0]);
+//
+//            char_to_binary(toEncrypt, encrypt_key);
+//        } else {
+//            decrypt_main();
+//        }
+//    }
 
 
-        if (process == 1) {
-            char encrypt_key[4];
-            char toEncrypt[50];
-
-            printf("Enter encryption key:(only 4 character):");
-            scanf(" %[^\n]", &encrypt_key[0]);
-
-            printf("Enter data to Encrypt!");
-            scanf(" %[^\n]", &toEncrypt[0]);
-
-            char_to_binary(toEncrypt, encrypt_key);
-        } else {
-            decrypt_main();
-        }
-    }
-
-
-//    space_counter();
-//    loading_from_file();
-//    printing_all_data();
-//    main_menu();
+    space_counter();
+    loading_from_file();
+    printing_all_data();
+    main_menu();
     return 0;
 }
